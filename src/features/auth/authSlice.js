@@ -42,7 +42,6 @@ export const RequireAuth = ({children}) => {
   const { getAuthed } = useAuth();
   const location = useLocation();
 
-  console.log('current location:', location.pathname);
   return (getAuthed().value)
     ? children
     : <Navigate to={"/login"} state={{path: location.pathname}} />;

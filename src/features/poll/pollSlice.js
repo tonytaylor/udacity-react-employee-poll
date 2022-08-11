@@ -20,7 +20,7 @@ export const addAndSaveQuestion = (optionOneText, optionTwoText, author) => {
 
 export const saveAnswerToRemote = ({ authedUser, questionId, answer }) => {
   return async (dispatch) => {
-    console.log('dispatching to remote:', authedUser);
+    // console.log('dispatching to remote:', authedUser);
     await _saveQuestionAnswer({ authedUser, qid: questionId, answer });
 
     dispatch(executeGlobalDataFetch());

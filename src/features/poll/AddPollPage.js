@@ -16,7 +16,7 @@ const AddPollPage = ({ authedUser, dispatch }) => {
 
   const onSubmit = (event) => {
     event.preventDefault();
-    console.log('current authenticated user:', authedUser);
+    // console.log('current authenticated user:', authedUser);
     dispatch(addAndSaveQuestion(optionOne, optionTwo, authedUser.value));
     navigate('/');
   };
