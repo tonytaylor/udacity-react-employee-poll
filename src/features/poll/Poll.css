@@ -1,0 +1,11 @@
+
+.poll {}
+
+.poll__heading {}
+
+.heading__small {}
+
+.heading__small:before {
+    content: '\a';
+    white-space: pre;
+}
