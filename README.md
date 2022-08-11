@@ -1,4 +1,24 @@
-# Getting Started with Create React App and Redux
+# Go Poll Yourself! 
+
+'Go Poll Yourself' is a web application intended to encourage
+employee autonomy, bolster organization collaboration and transparency.
+
+Our users can currently:
+
+- Create Polls
+- Answer users' Polls
+- See where you rank against other users in poll creation / engagement
+
+We are still a work in progress with more features in the pipeline!
+
+- Self-registration
+
+### Getting Started
+
+To get started, in the project directory run:
+
+`npm install && npm start`
+
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
 
