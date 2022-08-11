@@ -1,14 +1,17 @@
 import {Link, useNavigate} from 'react-router-dom';
 import { connect } from "react-redux";
 import { FiHome, FiList, FiPlusSquare } from "react-icons/fi";
-import { setAuthedUser } from "../auth/authSlice";
+
+import { useAuth } from "../auth/authSlice";
 
 const Nav = ({authedUser, users, dispatch}) => {
   const navigate = useNavigate();
+  const { logout } = useAuth();
   const onClick = (event) => {
     event.preventDefault();
-    dispatch(setAuthedUser(null));
-    navigate('/login');
+    logout().then(() => {
+      navigate('/login');
+    });
   };
 
   const userStatus = () => {

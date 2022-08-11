@@ -1,7 +1,7 @@
-import {Link, useNavigate} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
 import { connect } from "react-redux";
-import {useEffect, useState} from "react";
+import {useState} from "react";
 
 import Poll from "../poll/Poll";
 
@@ -9,7 +9,6 @@ import {getVotes} from "../../utils/helpers";
 
 const DashboardPage = ({ authedUser, questions }) => {
 
-  const navigate = useNavigate();
   const [showAnsweredQs, setShowAnsweredQs] = useState(false);
 
   const sortByTimestamp = ([, a_v], [, b_v]) => b_v.timestamp - a_v.timestamp;
@@ -19,15 +18,6 @@ const DashboardPage = ({ authedUser, questions }) => {
     return (done) ? filtered.length > 0 : filtered.length === 0;
   };
 
-
-  // TODO: I'm sure there's a better way to do this.
-  //       At the least, migrate this to a helper script.
-  //       UPDATE: Can't do that, as React will yell at you about using hooks
-  //               outside of component functions. Pack into a HOC perhaps?
-  useEffect(() => {
-    const noop = () => {};
-    (!authedUser.value) ? navigate('/login') : noop();
-  }, [authedUser, navigate]);
 
   return (
     <div className={"flex flex-col w-9/12 m-auto pt-8"}>
@@ -40,7 +30,7 @@ const DashboardPage = ({ authedUser, questions }) => {
               .filter(filterAnswered(false))
               .sort(sortByTimestamp).map(([id, question]) => {
                 return (
-                  <Link key={id} to={`/question/${id}`}>
+                  <Link key={id} to={`/questions/${id}`}>
                     <Poll key={id} poll={question} />
                   </Link>
                 );

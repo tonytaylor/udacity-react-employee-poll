@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { connect } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
@@ -11,13 +11,6 @@ const AddPollPage = ({ authedUser, dispatch }) => {
   const [optionOne, setOptionOne] = useState("");
   const [optionTwo, setOptionTwo] = useState("");
   const navigate = useNavigate();
-
-  // TODO: I'm sure there's a better way to do this.
-  //       At the least, migrate this to a helper script.
-  useEffect(() => {
-    const noop = () => {};
-    (!authedUser.value) ? navigate('/login') : noop();
-  }, [authedUser, navigate]);
 
   const onChange = (stateMutator) => (event) => stateMutator(event.target.value);
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Routes, Route, useNavigate} from 'react-router-dom';
+import {Routes, Route, useNavigate } from 'react-router-dom';
 
 import { connect } from "react-redux";
 import { useEffect } from "react";
@@ -10,6 +10,7 @@ import LoginPage from './features/user/LoginPage';
 import DashboardPage from "./features/dashboard/DashboardPage";
 import LeaderboardPage from "./features/leaderboard/LeaderboardPage";
 
+import { RequireAuth } from "./features/auth/authSlice";
 import { executeGlobalDataFetch } from "./app/globalSlice";
 
 import './App.css';
@@ -29,9 +30,6 @@ const App = ({ redirect, dispatch }) => {
     // - https://beta.reactjs.org/learn/you-might-not-need-an-effect
     // The <React.StrictMode /> component renders components twice in development
     // environments.  This does not occur in production environments.
-    const noop = () => {};
-    (redirect) ? navigate('/login') : noop();
-
     dispatch(executeGlobalDataFetch());
   }, [dispatch, navigate, redirect]);
 
@@ -40,11 +38,11 @@ const App = ({ redirect, dispatch }) => {
       <Nav />
       <Routes>
         <Route path={"*"} element={<ErrorPage />} />
-        <Route path={"/"} exact element={<DashboardPage />} />
+        <Route path={"/"} exact element={<RequireAuth><DashboardPage /></RequireAuth>} />
         <Route path={"/login"} element={<LoginPage />} />
-        <Route path={"/leaderboard"} element={<LeaderboardPage />} />
-        <Route path={"/add"} element={<AddPollPage />} />
-        <Route path={"/question/:id"} element={<PollPage />} />
+        <Route path={"/leaderboard"} element={<RequireAuth><LeaderboardPage /></RequireAuth>} />
+        <Route path={"/add"} element={<RequireAuth><AddPollPage /></RequireAuth>} />
+        <Route path={"/questions/:id"} element={<RequireAuth><PollPage /></RequireAuth>} />
       </Routes>
     </div>
   );

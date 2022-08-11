@@ -1,7 +1,7 @@
 import {useLocation, useNavigate, useParams} from "react-router-dom";
 import { connect } from "react-redux";
-import { saveAnswerToRemote } from "./pollSlice";
 import {useEffect} from "react";
+import { saveAnswerToRemote } from "./pollSlice";
 
 import {getVotes} from "../../utils/helpers";
 
@@ -14,13 +14,12 @@ const withRouter = (Component) => (props) => {
 };
 
 const PollPage = ({ authedUser, pollAuthor, question, dispatch }) => {
-
   const navigate = useNavigate();
 
   useEffect(() => {
     const noop = () => {};
-    (!authedUser.value) ? navigate('/login') : noop();
-  }, [authedUser, navigate]);
+    (question) ? noop() : navigate('/not-found');
+  }, [question, navigate]);
 
   const onClick = (event) => {
     event.preventDefault();

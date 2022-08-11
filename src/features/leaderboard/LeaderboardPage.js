@@ -1,18 +1,9 @@
 import { connect } from "react-redux";
 
 import Entry from "./Entry";
-import {useEffect} from "react";
-import {useNavigate} from "react-router-dom";
 
-const LeaderboardPage = ({ authedUser, users }) => {
-  const navigate = useNavigate();
+const LeaderboardPage = ({ users }) => {
 
-  // TODO: I'm sure there's a better way to do this.
-  //       At the least, migrate this to a helper script.
-  useEffect(() => {
-    const noop = () => {};
-    (!authedUser.value) ? navigate('/login') : noop();
-  }, [authedUser, navigate]);
 
   // TODO: Questions answered doesn't seem to update when
   //       users answer poll questions. Look into it shortly.

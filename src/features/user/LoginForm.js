@@ -1,18 +1,19 @@
 import { connect } from "react-redux";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
+import { useAuth } from '../auth/authSlice';
 
-import { setAuthedUser } from "../auth/authSlice";
-
-const LoginForm = ({ authedUser, users, dispatch }) => {
+const LoginForm = ({ users }) => {
     const [currentUser, setCurrentUser] = useState('');
     const navigate = useNavigate();
+    const { state } = useLocation();
+    const { login } = useAuth();
 
     const onSubmit = (event) => {
         event.preventDefault();
-        (currentUser)
-          ? dispatch(setAuthedUser(currentUser)) && navigate('/')
-          : alert('Please select from the available avatars.');
+        login(currentUser).then(() => {
+            navigate(state?.path || '/');
+        });
     };
 
     const onChange = (mutator) => (event) => {
